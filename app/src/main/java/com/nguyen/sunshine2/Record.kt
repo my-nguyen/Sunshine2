@@ -1,9 +1,6 @@
 package com.nguyen.sunshine2
 
 import java.io.Serializable
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.math.roundToInt
 
 data class Record(val city: City, val list: List<Day>)
 
@@ -18,25 +15,7 @@ data class Day(
     val humidity: Int,
     val weather: List<Weather>,
     val speed: Float
-) : Serializable {
-    fun toString(position: Int) : String {
-        val calendar = GregorianCalendar()
-        calendar.add(GregorianCalendar.DATE, position)
-        val formatter = SimpleDateFormat("EEE, MMM dd")
-        val string1 = formatter.format(calendar.time)
-        val string2 = weather[0].description
-        val string3 = "${temp.max.roundToInt()}/${temp.min.roundToInt()}"
-        return "$string1 - $string2 - $string3"
-    }
-
-    private fun format(temperature: Double, unit: String, imperial: String) : Int {
-        val converted = when {
-            (unit == imperial) -> (temperature * 1.8) + 32
-            else -> temperature
-        }
-        return converted.roundToInt()
-    }
-}
+) : Serializable
 
 data class Temperature(
     val day: Float,

@@ -63,7 +63,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun doShare() : Intent {
         val intent = Intent(Intent.ACTION_SEND)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
         intent.type = "text/plain"
         // intent.putExtra(Intent.EXTRA_TEXT, forecast)
         return intent

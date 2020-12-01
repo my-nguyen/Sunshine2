@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         private const val NUM_DAYS = 16
         private const val MODE_JSON = "json"
         private const val MODE_XML = "xml"
-        private const val UNIT_STANDARD = "standard"
         private const val UNIT_METRIC = "metric"
         private const val UNIT_IMPERIAL = "imperial"
         private const val ZIPCODE_DEFAULT = "95131"
