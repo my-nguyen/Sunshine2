@@ -1,9 +1,18 @@
 package com.nguyen.sunshine2
 
+import android.content.Context
+import androidx.preference.PreferenceManager
 import java.text.SimpleDateFormat
 import java.util.*
 
 object Utility {
+    fun getPreference(context: Context, resKey: Int, resDefaultValue: Int) : String? {
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
+        val locationKey = context.getString(resKey)
+        val locationDefault = context.getString(resDefaultValue)
+        return sharedPreferences.getString(locationKey, locationDefault)
+    }
+
     fun getWeatherResource(weatherId: Int) : Int {
         // Based on weather code data found at:
         // http://bugs.openweathermap.org/projects/api/wiki/Weather_Condition_Codes

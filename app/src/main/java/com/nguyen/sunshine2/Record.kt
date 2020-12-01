@@ -30,7 +30,6 @@ data class Day(
     }
 
     private fun format(temperature: Double, unit: String, imperial: String) : Int {
-        // val unit = Preferences.getString(context, R.string.pref_units_key, R.string.pref_units_label_metric)
         val converted = when {
             (unit == imperial) -> (temperature * 1.8) + 32
             else -> temperature

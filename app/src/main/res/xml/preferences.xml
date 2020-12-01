@@ -3,24 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <EditTextPreference
-        android:title="@string/pref_location_label"
+        android:title="Location"
         android:key="@string/pref_location_key"
         android:defaultValue="@string/pref_location_default"
         android:inputType="text"
         android:singleLine="true" />
 
     <ListPreference
-        android:title="@string/pref_units_label"
+        android:title="Temperature Units"
         android:key="@string/pref_units_key"
         android:defaultValue="@string/pref_units_metric"
         android:entryValues="@array/pref_units_values"
         android:entries="@array/pref_units_options" />
 
     <CheckBoxPreference
-        android:title="@string/pref_enable_notifications_label"
-        android:key="@string/pref_enable_notifications_key"
-        android:summaryOff="@string/pref_enable_notifications_false"
-        android:summaryOn="@string/pref_enable_notifications_true"
-        android:defaultValue="@string/pref_enable_notifications_default" />
+        android:title="Weather Notifications"
+        android:key="@string/pref_notifications_key"
+        android:summaryOff="@string/pref_notifications_disabled"
+        android:summaryOn="@string/pref_notifications_enabled"
+        android:defaultValue="@string/pref_notifications_default" />
 
 </PreferenceScreen>

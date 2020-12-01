@@ -32,7 +32,6 @@ class DayAdapter(val context: Context, val days: List<Day>) : RecyclerView.Adapt
         }
 
         fun bind(day: Day) {
-            // itemView.text1.text = day.toString(adapterPosition)
             val text = Utility.getDay(adapterPosition)
             val jour = when (adapterPosition) {
                 0 -> text
@@ -40,7 +39,6 @@ class DayAdapter(val context: Context, val days: List<Day>) : RecyclerView.Adapt
             }
             itemView.text_day.text = jour
             val resource = Utility.getWeatherResource(day.weather[0].id)
-            // itemView.image.setImageResource(R.drawable.art_clear)
             itemView.image.setImageResource(resource)
             itemView.text_forecast.text = day.weather[0].main
             itemView.text_high.text = "${day.temp.max.roundToInt().toString()}\u00B0"

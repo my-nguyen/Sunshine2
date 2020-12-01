@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         private const val UNIT_STANDARD = "standard"
         private const val UNIT_METRIC = "metric"
         private const val UNIT_IMPERIAL = "imperial"
+        private const val ZIPCODE_DEFAULT = "95131"
     }
 
     private lateinit var service: WeatherService
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val divider = DividerItemDecoration(recycler_forecast.context, layoutManager.orientation)
         recycler_forecast.addItemDecoration(divider)
 
-        fetchWeather("95131")
+        fetchWeather(ZIPCODE_DEFAULT, UNIT_IMPERIAL)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -64,13 +65,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_refresh -> {
-                /*val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-                val locationKey = getString(R.string.pref_location_key)
-                val locationDefault = getString(R.string.pref_location_default)
-                val location = sharedPreferences.getString(locationKey, locationDefault)?.toInt()*/
-                val location = Preferences.getString(this, R.string.pref_location_key, R.string.pref_location_default)
-                if (location != null) {
-                    fetchWeather(location)
+                val location = Utility.getPreference(this, R.string.pref_location_key, R.string.pref_location_default)
+                val units = Utility.getPreference(this, R.string.pref_units_key, R.string.pref_units_imperial)
+                Log.i(TAG, "location $location, $units: $units")
+                if (location != null && units != null) {
+                    fetchWeather(location, units)
                 }
             }
             R.id.action_settings -> {
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             R.id.action_map -> {
-                val location = Preferences.getString(this, R.string.pref_location_key, R.string.pref_location_default)
+                val location = Utility.getPreference(this, R.string.pref_location_key, R.string.pref_location_default)
                 val geo = Uri.parse("geo:0,0?")
                     .buildUpon()
                     .appendQueryParameter("q", location)
@@ -95,8 +94,8 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun fetchWeather(zipcode: String) {
-        service.fetchWeather(zipcode, UNIT_IMPERIAL, NUM_DAYS, API_KEY).enqueue(object: Callback<Record> {
+    private fun fetchWeather(zipcode: String, units: String) {
+        service.fetchWeather(zipcode, units, NUM_DAYS, API_KEY).enqueue(object: Callback<Record> {
             override fun onResponse(call: Call<Record>, response: Response<Record>) {
                 Log.i(TAG, "onResponse $response")
                 if (response.body() == null) {
